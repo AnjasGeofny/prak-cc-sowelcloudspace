@@ -138,7 +138,7 @@ Memisahkan kode berdasarkan fungsinya (Separation of Concerns) agar mudah dikelo
 - schemas.py: Menggunakan Pydantic untuk memvalidasi data yang masuk dari user (Request) dan data yang dikirim balik ke user (Response).
 - crud.py: Berisi fungsi logika utama untuk memanipulasi data di database, seperti menambah, mengambil, mengubah, dan menghapus data.
 
-**LANGKAH 3 : Implementasi API Endpoints & Testing**
+**TAHAP 3 : Implementasi API Endpoints & Testing**
 Tahap akhir untuk menyediakan akses bagi frontend:
 - Endpoint Integration: Menyatukan semua komponen di main.py sehingga server dapat menerima request HTTP dan menjalankan perintah database yang sesuai.
 - API Endpoints: Tersedia 5 endpoint utama untuk operasi CRUD pada resource /items, serta endpoint /health untuk cek status server.
