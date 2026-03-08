@@ -217,9 +217,9 @@ FastAPI secara otomatis menyediakan dokumentasi API interaktif menggunakan **Swa
 
 ---
 
-# 2. Eksekusi Endpoint dan Testing
+## 2. Eksekusi Endpoint dan Testing
 
-## 2.1 Menjalankan Server
+### 2.1 Menjalankan Server
 
 Server backend dijalankan menggunakan perintah berikut:
 
@@ -250,7 +250,7 @@ http://localhost:8000
 
 ---
 
-## 2.2 Dokumentasi API melalui Swagger UI
+### 2.2 Dokumentasi API melalui Swagger UI
 
 FastAPI secara otomatis menyediakan dokumentasi interaktif berbasis **Swagger UI** yang memungkinkan pengguna untuk melihat dan menguji endpoint API secara langsung.
 
@@ -269,7 +269,7 @@ Melalui halaman ini pengguna dapat:
 
 ---
 
-# 3. Verifikasi Pengujian
+## 3. Verifikasi Pengujian
 
 Pengujian dilakukan menggunakan **Swagger UI** untuk memastikan setiap endpoint API berjalan sesuai dengan spesifikasi yang telah ditetapkan.
 
@@ -279,9 +279,9 @@ Dengan demikian seluruh skenario pengujian dinyatakan **berhasil (PASS)**.
 
 ---
 
-# 3.1 Hasil Pengujian Endpoint
+### 3.1 Hasil Pengujian Endpoint
 
-## 1. DELETE /items/{item_id}
+#### 1. DELETE /items/{item_id}
 
 **Method**
 
@@ -305,7 +305,7 @@ Endpoint ini digunakan untuk **menghapus data item berdasarkan ID**.
 
 ---
 
-## 2. GET /health
+#### 2. GET /health
 
 **Method**
 
@@ -338,7 +338,7 @@ Endpoint ini digunakan untuk **mengecek status server backend**.
 
 ---
 
-## 3. GET /items/{item_id}
+#### 3. GET /items/{item_id}
 
 **Method**
 
@@ -376,7 +376,7 @@ Endpoint ini digunakan untuk **mengambil data item berdasarkan ID**.
 
 ---
 
-## 4. GET /items/stats
+#### 4. GET /items/stats
 
 **Method**
 
@@ -419,7 +419,7 @@ Endpoint ini digunakan untuk **menampilkan statistik data item yang tersimpan di
 
 ---
 
-## 5. GET /items
+#### 5. GET /items
 
 **Method**
 
@@ -477,7 +477,7 @@ Endpoint ini digunakan untuk **menampilkan seluruh data item yang tersimpan di d
 
 ---
 
-## 6. GET /team
+#### 6. GET /team
 
 **Method**
 
@@ -531,7 +531,7 @@ Endpoint ini digunakan untuk **menampilkan informasi tim pengembang aplikasi**.
 
 ---
 
-## 7. POST /items
+#### 7. POST /items
 
 **Method**
 
@@ -569,7 +569,7 @@ Endpoint ini digunakan untuk **menambahkan data item baru ke dalam database**.
 
 ---
 
-## 8. PUT /items/{item_id}
+#### 8. PUT /items/{item_id}
 
 **Method**
 
@@ -605,7 +605,7 @@ PUT
 
 Endpoint ini digunakan untuk **memperbarui data item yang sudah ada berdasarkan ID**.
 
-## 3.2 Rangkuman Hasil Pengujian
+### 3.2 Rangkuman Hasil Pengujian
 
 Seluruh endpoint telah diuji melalui Swagger UI dan berfungsi sesuai dengan spesifikasi. Backend dinyatakan stabil serta siap untuk integrasi dengan frontend dan deployment ke lingkungan cloud. 🚀
 
