@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
 from database import engine, get_db
-from models import Base
+from models import Base, Item
 from schemas import ItemCreate, ItemUpdate, ItemResponse, ItemListResponse
 import crud
 
@@ -66,6 +66,48 @@ def list_items(
     return crud.get_items(db=db, skip=skip, limit=limit, search=search)
 
 
+@app.get("/items/stats")
+def items_stats(db: Session = Depends(get_db)):
+    """
+    Menampilkan statistik inventory.
+    
+    - **total_items**: jumlah semua item
+    - **total_value**: total nilai inventory (price × quantity)
+    - **most_expensive**: item dengan harga tertinggi
+    - **cheapest**: item dengan harga terendah
+    """
+    
+    items = db.query(Item).all()
+
+    if not items:
+        return {
+            "total_items": 0,
+            "total_value": 0,
+            "most_expensive": None,
+            "cheapest": None
+        }
+
+    most_expensive = max(items, key=lambda x: x.price)
+    cheapest = min(items, key=lambda x: x.price)
+
+    total_value = sum(i.price * i.quantity for i in items)
+
+    return {
+        "total_items": len(items),
+        "total_value": total_value,
+        "most_expensive": {
+            "id": most_expensive.id,
+            "name": most_expensive.name,
+            "price": most_expensive.price
+        },
+        "cheapest": {
+            "id": cheapest.id,
+            "name": cheapest.name,
+            "price": cheapest.price
+        }
+    }
+
+
 @app.get("/items/{item_id}", response_model=ItemResponse)
 def get_item(item_id: int, db: Session = Depends(get_db)):
     """Ambil satu item berdasarkan ID."""
@@ -95,7 +137,6 @@ def delete_item(item_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail=f"Item dengan id={item_id} tidak ditemukan")
     return None
 
-
 # ==================== TEAM INFO ====================
 
 @app.get("/team")
@@ -111,3 +152,4 @@ def team_info():
             {"name": "Meiske Handayani", "nim": "10231052", "role": "Lead QA & Docs"},
         ],
     }
+
