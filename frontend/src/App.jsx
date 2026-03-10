@@ -3,6 +3,7 @@ import Header from "./components/Header"
 import SearchBar from "./components/SearchBar"
 import ItemForm from "./components/ItemForm"
 import ItemList from "./components/ItemList"
+import SortDropdown from "./components/SortDropdown"
 import { fetchItems, createItem, updateItem, deleteItem, checkHealth } from "./services/api"
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
   const [isConnected, setIsConnected] = useState(false)
   const [editingItem, setEditingItem] = useState(null)
   const [searchQuery, setSearchQuery] = useState("")
+  const [sortBy, setSortBy] = useState("name") // default sorting
 
   // ==================== LOAD DATA ====================
   const loadItems = useCallback(async (search = "") => {
@@ -30,30 +32,23 @@ function App() {
 
   // ==================== ON MOUNT ====================
   useEffect(() => {
-    // Cek koneksi API
     checkHealth().then(setIsConnected)
-    // Load items
     loadItems()
   }, [loadItems])
 
   // ==================== HANDLERS ====================
-
   const handleSubmit = async (itemData, editId) => {
     if (editId) {
-      // Mode edit
       await updateItem(editId, itemData)
       setEditingItem(null)
     } else {
-      // Mode create
       await createItem(itemData)
     }
-    // Reload daftar items
     loadItems(searchQuery)
   }
 
   const handleEdit = (item) => {
     setEditingItem(item)
-    // Scroll ke atas ke form
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
@@ -78,6 +73,19 @@ function App() {
     setEditingItem(null)
   }
 
+  // ==================== SORTING ====================
+  const getSortedItems = () => {
+    const sorted = [...items]
+    if (sortBy === "name") {
+      sorted.sort((a, b) => a.name.localeCompare(b.name))
+    } else if (sortBy === "price") {
+      sorted.sort((a, b) => a.price - b.price)
+    } else if (sortBy === "latest") {
+      sorted.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+    }
+    return sorted
+  }
+
   // ==================== RENDER ====================
   return (
     <div style={styles.app}>
@@ -89,8 +97,9 @@ function App() {
           onCancelEdit={handleCancelEdit}
         />
         <SearchBar onSearch={handleSearch} />
+        <SortDropdown sortBy={sortBy} onChange={setSortBy} />
         <ItemList
-          items={items}
+          items={getSortedItems()}
           onEdit={handleEdit}
           onDelete={handleDelete}
           loading={loading}
