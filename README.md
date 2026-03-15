@@ -64,7 +64,7 @@ npm run dev
 | ------ | ---------------------- | ------ |
 | 1      | Setup & Hello World    | ✅     |
 | 2      | REST API + Database    | ✅     |
-| 3      | React Frontend         | ⬜     |
+| 3      | React Frontend         | ✅     |
 | 4      | Full-Stack Integration | ⬜     |
 | 5-7    | Docker & Compose       | ⬜     |
 | 8      | UTS Demo               | ⬜     |
@@ -93,8 +93,16 @@ cc-kelompok-sowelcloudspace/
 │   │   ├── assets/                              # Gambar & aset statis
 │   │   ├── App.jsx                              # Komponen utama React
 │   │   ├── App.css                              # Style komponen App
-│   │   ├── main.jsx                             # Entry point React
-│   │   └── index.css                            # Style global
+        ├── components/
+            ├── Header.jsx                       # Judul & statistik
+            ├── SearchBar.jsx                    # Input pencarian
+            ├── ItemForm.jsx                     # Form create/edit item
+            ├── ItemList.jsx                     # Container daftar items
+            └── ItemCard.jsx                     # Card untuk setiap item
+        ├── services/
+        │   └── api.js                           # Semua fungsi fetch API
+        └── main.jsx                             # Entry point (tidak diubah)
+        └── index.css                            # Style global
 │   ├── index.html                               # Template HTML utama
 │   ├── package.json                             # Dependency & scripts Node.js
 │   ├── vite.config.js                           # Konfigurasi Vite
@@ -619,3 +627,5 @@ Seluruh endpoint telah diuji melalui Swagger UI dan berfungsi sesuai dengan spes
 | 6 | GET | /items/stats | - | Statistik item (total item, nilai total, item termahal & termurah) | 200 OK | ✅ Sesuai |
 | 7 | GET | /health | - | Status server healthy | 200 OK | ✅ Sesuai |
 | 8 | GET | /team | - | Informasi tim pengembang | 200 OK | ✅ Sesuai |
+
+
