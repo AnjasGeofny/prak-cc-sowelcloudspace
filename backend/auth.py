@@ -72,7 +72,10 @@ def get_current_user(
     Gunakan di endpoint yang butuh autentikasi.
     """
     payload = decode_token(token)
-    user_id: int = payload.get("sub")
+    user_id = payload.get("sub")
+    if user_id is None:
+        raise HTTPException(status_code=401, detail="Token tidak valid")
+    user_id = int(user_id)
 
     if user_id is None:
         raise HTTPException(
